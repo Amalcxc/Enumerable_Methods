@@ -39,19 +39,28 @@ module Enumerable
     final_bool
   end
 
+  def my_none?
+    final_bool = true
+    self.my_each { |n| final_bool = false if yield(n) }
+    
+    final_bool
+  end
+
 end
 
 ["A","b","A","b","A","b"].my_each{|a| puts a}
 
 ["A","b","A","b","A","b"].my_each_with_index{
-  #|num| puts "#{num} -> #{i = 'potato' if i > 2}"}
+  |num| puts "#{num} -> #{i = 'potato' if i > 2}"}
 
 ["A","b","A","john","A","b"].my_select{
-  #|person| person != "john"}
+  |person| person != "john"}
 
-["foiiur", "fiiive", "sixsix", "seveeen"].my_all? { |a| a.length > 5 }
+  ["foiiur", "fiiive", "sixsix", "seveeen"].my_all? { |a| a.length > 5 }
 
 ["fr", "fiiive", "sixsix", "seveeen"].my_any? { |a| a.length > 5 }
+
+["fix", "emmm", "wdss22", "ssss"].my_none? { |a| a.length > 5 }
 
 
 
