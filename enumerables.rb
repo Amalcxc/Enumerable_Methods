@@ -23,7 +23,14 @@ module Enumerable
       i += 1
     end
     fliter
-  end  
+  end
+
+  def my_all?
+    final_bool = true
+    self.my_each { |n| final_bool = false if !yield(n) }
+
+    final_bool
+  end
 
 end
 
@@ -34,6 +41,9 @@ end
 
 ["A","b","A","john","A","b"].my_select{
   |person| person != "john"}
+
+["foiiur", "fiiive", "sixsix", "seveeen"].my_all? { |a| a.length > 5 }
+
 
 
 
