@@ -65,21 +65,43 @@ module Enumerable
   end
 
   def my_inject(*args)
-    num = []
-    result = 0
-    i = 0
-    if args.empty?
-      start_position = 0
+    result = nil
+    symbol = nil
+
+    case args.length
+    when 1
+      if args[0].is_a?(Symbol) || args[0].is_a?(String)
+        symbol = args[0]
+      else
+        result = args[0]
+      end
+
+    when 2
+      result = args[0]
+      symbol = args[1]
+
+    end
+
+    if block_given? && symbol.nil?
+      self.my_each { |x| result = yield(result, x) }
+
     else
-      start_position = args[i]
-    end  
-    self.my_each_with_index {|x, i| result = yield(result, x) if i >= start_position}
+      self.my_each { |x| result = result.nil? ? x : result.send(symbol, x) }
+
+    end
     return result
   end  
 
 end
 
-puts [1,2,3,4,10].my_inject(3){|sum, number| sum + number}
+#puts [1,2,3,4,10].my_inject(3){|sum, number| sum + number}
+
+#puts [2, 20, 5].my_inject(:*)
+puts [3, 6, 10].my_inject(0) {|sum, number| sum + number}
+
+#puts :+.is_a?(String)
+
+#puts [2, 20, 5].my_inject(2, {|num| num.+})
 
 
 
