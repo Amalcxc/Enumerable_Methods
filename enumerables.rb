@@ -46,8 +46,27 @@ module Enumerable
     final_bool
   end
 
+  def my_count(*args)
+    counter = 0
+    if (args.empty?)
+      self.my_each { |to_count| counter += 1 }
+    else
+      self.my_each { |to_count| counter += 1 if args[0] == to_count}
+    end
+
+    counter
+  end
+  
+  def my_map
+    result = []
+    self.my_each { |n| result.push(yield(n)) }
+    result
+
+  end
+
 end
 
+=begin
 ["A","b","A","b","A","b"].my_each{|a| puts a}
 
 ["A","b","A","b","A","b"].my_each_with_index{
@@ -61,6 +80,13 @@ end
 ["fr", "fiiive", "sixsix", "seveeen"].my_any? { |a| a.length > 5 }
 
 ["fix", "emmm", "wdss22", "ssss"].my_none? { |a| a.length > 5 }
+
+puts [1, 1, 1, 4, nil, nil].my_count(1, 2, 3)
+
+arr_a = %w[a b c d e f]
+puts arr_a.my_map { |a| a * 2 }
+=end
+
 
 
 
