@@ -64,7 +64,24 @@ module Enumerable
 
   end
 
+  def my_inject(*args)
+    num = []
+    result = 0
+    i = 0
+    if args.empty?
+      start_position = 0
+    else
+      start_position = args[i]
+    end  
+    self.my_each_with_index {|x, i| result = yield(result, x) if i >= start_position}
+    return result
+  end  
+
 end
+
+puts [1,2,3,4,10].my_inject(3){|sum, number| sum + number}
+
+
 
 =begin
 ["A","b","A","b","A","b"].my_each{|a| puts a}
