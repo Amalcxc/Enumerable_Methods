@@ -32,7 +32,7 @@ module Enumerable
     return enum_for(:my_select) unless block_given?
 
     selected = []
-    to_a.my_each { |_item| selected.push(n) if yield(n) }
+    to_a.my_each { |n| selected.push(n) if yield(n) }
     selected
   end
 
@@ -154,3 +154,4 @@ end
 def multiply_els(arr)
   arr.my_inject(:*)
 end
+
