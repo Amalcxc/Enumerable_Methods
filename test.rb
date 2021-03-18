@@ -3,7 +3,7 @@ require_relative 'enumerables'
 # 1 - my_each ==================================================
 puts "\n=======================\n1 - my_each\n======================="
 %w[how are you doing].my_each { |n| puts n }
-{ 'key1' => { link: 'index/all', size: 666 } }.my_each { |n| puts n }
+{ foo: 0, bar: 1, baz: 2 }.my_each { |n| puts n }
 
 # 2 - my_each_with_index =======================================
 puts "\n=======================\n2 - my_each_with_index\n======================="
